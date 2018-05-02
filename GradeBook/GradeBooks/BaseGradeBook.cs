@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq;
-
-using GradeBook.Enums;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using GradeBook.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -109,18 +108,27 @@ namespace GradeBook.GradeBooks
 
         public virtual double GetGPA(char letterGrade, StudentType studentType)
         {
+            var gpa = 0;
+
+            if (IsWeighted && (studentType == StudentType.Honors || studentType == StudentType.DualEnrolled))
+                gpa++;
+
             switch (letterGrade)
             {
                 case 'A':
-                    return 4;
+                    gpa = gpa + 4;
+                    return gpa;
                 case 'B':
-                    return 3;
+                    gpa = gpa + 3;
+                    return gpa;
                 case 'C':
-                    return 2;
+                    gpa = gpa + 2;
+                    return gpa;
                 case 'D':
-                    return 1;
+                    gpa = gpa + 1;
+                    return gpa;
             }
-            return 0;
+            return gpa;
         }
 
         public virtual void CalculateStatistics()
