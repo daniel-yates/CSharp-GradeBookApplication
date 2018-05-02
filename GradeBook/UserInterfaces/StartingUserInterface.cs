@@ -41,17 +41,7 @@ namespace GradeBook.UserInterfaces
 
             var name = parts[1];
             var gradeType = parts[2].ToLower();
-            bool weighted = false;
-
-            if (parts[3].ToLower() == "true")
-                weighted = true;
-            else if (parts[3].ToLower() == "false")
-                weighted = false;
-            else
-            {
-                Console.WriteLine("{0} is not an acceptable value, must be true or false", parts[3].ToLower());
-                return;
-            }
+            var weighted = bool.Parse(parts[3].ToLower());
 
             BaseGradeBook gradeBook;
             if (gradeType == "standard")
